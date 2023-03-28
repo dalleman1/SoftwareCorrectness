@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
+
 public class Main {
     public static void main(String[] args) {
         Border blackLine = BorderFactory.createLineBorder(Color.black);
@@ -14,30 +16,34 @@ public class Main {
         panel1.setPreferredSize(new Dimension(940, 720));
         panel1.setBorder(blackLine);
 
-        JScrollPane panel2 = new JScrollPane();
-        panel2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        panel2.setPreferredSize(new Dimension(320, 160));
+        JPanel panel2 = new JPanel();
+        panel2.setPreferredSize(new Dimension(320, 220));
         panel2.setBorder(yellowLine);
 
+        JTextArea display = new JTextArea("Errors and commands will be shown here",13,172);
+        display.setEditable(false); // set textArea non-editable
+        JScrollPane scrollPane = new JScrollPane(display);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        JFrame frame = new JFrame("My First GUI");
+        JFrame frame = new JFrame("Software Correctness Project");
         frame.setDefaultCloseOperation(3);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        String[] options = {"Line", "Rectangle", "Circle", "Text-At", "Bounding-Box", "Draw", "Fill"};
-
-        //Panel 1
-        final JComboBox<String> cb = new JComboBox<String>(options);
-
-        panel1.add(cb);
-
         //Panel 2
-        JTextArea tf = new JTextArea(5,20);
-        tf.append("Errors and commands will be outputted here");
+
+        panel2.add(scrollPane);
+        //Panel 1
+
+        JTextField tf = new JTextField("X1:");
+        tf.setBounds(30,100, 100,200);
         tf.setEditable(false);
-        tf.setVisible(true);
-        tf.setCaretPosition(tf.getDocument().getLength());
-        panel2.add(tf);
+        tf.setVisible(false);
+
+        ComboBoxAction cb = new ComboBoxAction(panel1, tf);
+        cb.setDefaultCloseOperation( EXIT_ON_CLOSE );
+        cb.pack();
+        cb.setVisible(true);
+
 
         //Panel 3
         MainPanel panel3 = new MainPanel(16,16);
