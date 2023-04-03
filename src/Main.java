@@ -34,12 +34,8 @@ public class Main {
         panel2.add(scrollPane);
         //Panel 1
 
-        JTextField tf = new JTextField("X1:");
-        tf.setBounds(30,100, 100,200);
-        tf.setEditable(false);
-        tf.setVisible(false);
 
-        ComboBoxAction cb = new ComboBoxAction(panel1, tf);
+        ComboBoxAction cb = new ComboBoxAction(panel1, display);
         cb.setDefaultCloseOperation( EXIT_ON_CLOSE );
         cb.pack();
         cb.setVisible(true);
@@ -58,7 +54,6 @@ public class Main {
                 panel.setDrawable(new GridObject(1, 1, panel));
             }
         }
-
         frame.getContentPane().add(panel1, BorderLayout.EAST);
         frame.getContentPane().add(panel2, BorderLayout.SOUTH);
         frame.getContentPane().add(panel3, BorderLayout.WEST);
