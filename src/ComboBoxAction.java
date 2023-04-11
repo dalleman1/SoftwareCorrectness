@@ -8,13 +8,15 @@ public class ComboBoxAction extends JFrame implements ActionListener {
     JTextField inputx1, inputx2, inputy1, inputy2, inputr, inputt, inputg, inputc;
     JTextArea messages;
     JButton but;
-
+    Graphics2D graphics = null;
+    DrawPanel mainPanel;
     String currentSelectedItem;
-    public ComboBoxAction(JPanel panel, JTextArea display) {
+    public ComboBoxAction(JPanel panel, JTextArea display, DrawPanel panel2) {
         JComboBox<String> comboBox = new JComboBox<String>();
         currentSelectedItem = "None";
         JButton button = new JButton("Submit");
-
+        mainPanel = panel2;
+        ShapeHolder shapeholder = new ShapeHolder();
         button.setBounds(375, 550, 100,60);
         button.addActionListener(new ActionListener() {
             @Override
@@ -28,6 +30,10 @@ public class ComboBoxAction extends JFrame implements ActionListener {
                             }
                             messages.append("\nSubmitted " + currentSelectedItem + " with x1: " + inputx1.getText() + ", x2: " + inputx2.getText() + ", y1: " + inputy1.getText() + ", y2: " + inputy2.getText());
 
+                            shapeholder.createLine(Integer.parseInt(inputx1.getText())
+                                    ,Integer.parseInt(inputy1.getText())
+                                    ,Integer.parseInt(inputx2.getText()),Integer.parseInt(inputy2.getText()), mainPanel);
+                            mainPanel.revalidate();
                             //Call Scala class that does something
 
                             break;
@@ -65,6 +71,9 @@ public class ComboBoxAction extends JFrame implements ActionListener {
                                 throw new Exception("Text field cannot be empty...");
                             }
                             messages.append("\nSubmitted " + currentSelectedItem + " with x1: " + inputx1.getText() + ", x2: " + inputx2.getText() + ", y1: " + inputy1.getText() + ", y2: " + inputy2.getText() + "" + "");
+                            graphics = shapeholder.createBoundingBox(Integer.parseInt(inputx1.getText())
+                                    ,Integer.parseInt(inputy1.getText())
+                                    ,Integer.parseInt(inputx2.getText()),Integer.parseInt(inputy2.getText()), mainPanel);
                             break;
                         case "Fill":
                             if (inputc.getText().isEmpty() || inputg.getText().isEmpty())
@@ -230,6 +239,7 @@ public class ComboBoxAction extends JFrame implements ActionListener {
         // inputx1, inputx2, inputy1, inputy2, inputr, inputt, inputg, inputc;
         JComboBox comboBox = (JComboBox) e.getSource();
         //currArea.append("" + comboBox.getSelectedItem());
+
 
         if (comboBox.getSelectedItem() == "Line")
         {

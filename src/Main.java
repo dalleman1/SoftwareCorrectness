@@ -32,28 +32,17 @@ public class Main {
         //Panel 2
 
         panel2.add(scrollPane);
-        //Panel 1
 
+        DrawPanel panel3 = new DrawPanel();
+        panel3.setPreferredSize(new Dimension(930, 560));
+        panel3.setBorder(greenLine);
 
-        ComboBoxAction cb = new ComboBoxAction(panel1, display);
+        ComboBoxAction cb = new ComboBoxAction(panel1, display, panel3);
         cb.setDefaultCloseOperation( EXIT_ON_CLOSE );
         cb.pack();
         cb.setVisible(true);
 
 
-        //Panel 3
-        MainPanel panel3 = new MainPanel(16,16);
-        panel3.setPreferredSize(new Dimension(930, 560));
-        panel3.setBorder(greenLine);
-
-        for(int i = 0; i < 16; i++)
-        {
-            for(int j = 0; j < 16; j++)
-            {
-                DrawPanel panel = panel3.panels[i][j];
-                panel.setDrawable(new GridObject(1, 1, panel));
-            }
-        }
         frame.getContentPane().add(panel1, BorderLayout.EAST);
         frame.getContentPane().add(panel2, BorderLayout.SOUTH);
         frame.getContentPane().add(panel3, BorderLayout.WEST);
