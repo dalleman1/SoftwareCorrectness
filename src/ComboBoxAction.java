@@ -269,7 +269,7 @@ public class ComboBoxAction extends JFrame implements ActionListener {
             t.setVisible(false);
             g.setVisible(false);
             c.setVisible(false);
-            messages.append("\nSelected: " + comboBox.getSelectedItem());
+            //messages.append("\nSelected: " + comboBox.getSelectedItem());
 
 
         }
@@ -331,7 +331,7 @@ public class ComboBoxAction extends JFrame implements ActionListener {
             t.setVisible(false);
             g.setVisible(false);
             c.setVisible(false);
-            messages.append("\nSelected: " + comboBox.getSelectedItem());
+            //messages.append("\nSelected: " + comboBox.getSelectedItem());
         }
         if (comboBox.getSelectedItem() == "Text-At")
         {
@@ -362,7 +362,7 @@ public class ComboBoxAction extends JFrame implements ActionListener {
             t.setVisible(true);
             g.setVisible(false);
             c.setVisible(false);
-            messages.append("\nSelected: " + comboBox.getSelectedItem());
+            //messages.append("\nSelected: " + comboBox.getSelectedItem());
         }
         if (comboBox.getSelectedItem() == "Draw")
         {
@@ -392,7 +392,7 @@ public class ComboBoxAction extends JFrame implements ActionListener {
             t.setVisible(false);
             g.setVisible(true);
             c.setVisible(true);
-            messages.append("\nSelected: " + comboBox.getSelectedItem());
+            //messages.append("\nSelected: " + comboBox.getSelectedItem());
         }
         if (comboBox.getSelectedItem() == "Bounding-Box")
         {
@@ -422,7 +422,7 @@ public class ComboBoxAction extends JFrame implements ActionListener {
             t.setVisible(false);
             g.setVisible(false);
             c.setVisible(false);
-            messages.append("\nSelected: " + comboBox.getSelectedItem());
+            //messages.append("\nSelected: " + comboBox.getSelectedItem());
         }
         if (comboBox.getSelectedItem() == "Fill")
         {
@@ -452,7 +452,7 @@ public class ComboBoxAction extends JFrame implements ActionListener {
             t.setVisible(false);
             g.setVisible(true);
             c.setVisible(true);
-            messages.append("\nSelected: " + comboBox.getSelectedItem());
+            //messages.append("\nSelected: " + comboBox.getSelectedItem());
         }
         //  make sure popup is closed when 'isTableCellEditor' is used
 
