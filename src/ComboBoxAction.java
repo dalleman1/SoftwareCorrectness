@@ -32,7 +32,7 @@ public class ComboBoxAction extends JFrame implements ActionListener {
 
                             shapeholder.createLine(Integer.parseInt(inputx1.getText())
                                     ,Integer.parseInt(inputy1.getText())
-                                    ,Integer.parseInt(inputx2.getText()),Integer.parseInt(inputy2.getText()), mainPanel);
+                                    ,Integer.parseInt(inputx2.getText()),Integer.parseInt(inputy2.getText()));
                             mainPanel.revalidate();
                             //Call Scala class that does something
 
@@ -43,6 +43,10 @@ public class ComboBoxAction extends JFrame implements ActionListener {
                                 throw new Exception("Text field cannot be empty...");
                             }
                             messages.append("\nSubmitted " + currentSelectedItem + " with x1: " + inputx1.getText() + ", x2: " + inputx2.getText() + ", y1: " + inputy1.getText() + ", y2: " + inputy2.getText() + "");
+                            shapeholder.createRect(Integer.parseInt(inputx1.getText())
+                                    ,Integer.parseInt(inputy1.getText())
+                                    ,Integer.parseInt(inputx2.getText()),Integer.parseInt(inputy2.getText()));
+                            mainPanel.revalidate();
                             break;
                         case "Circle":
                             if (inputx1.getText().isEmpty() || inputy1.getText().isEmpty() || inputr.getText().isEmpty())
@@ -50,6 +54,10 @@ public class ComboBoxAction extends JFrame implements ActionListener {
                                 throw new Exception("Text field cannot be empty...");
                             }
                             messages.append("\nSubmitted " + currentSelectedItem + " with x1: " + inputx1.getText() + ", y1: " + inputy1.getText() + ", radius: " + inputr.getText());
+                            shapeholder.createCircle(Integer.parseInt(inputx1.getText())
+                                    ,Integer.parseInt(inputy1.getText())
+                                    ,Integer.parseInt(inputr.getText()));
+                            mainPanel.revalidate();
                             break;
                         case "Text-At":
                             if (inputx1.getText().isEmpty() || inputy1.getText().isEmpty() || inputt.getText().isEmpty())
@@ -301,7 +309,7 @@ public class ComboBoxAction extends JFrame implements ActionListener {
             t.setVisible(false);
             g.setVisible(false);
             c.setVisible(false);
-            messages.append("\nSelected: " + comboBox.getSelectedItem());
+            //messages.append("\nSelected: " + comboBox.getSelectedItem());
         }
         if (comboBox.getSelectedItem() == "Circle")
         {
