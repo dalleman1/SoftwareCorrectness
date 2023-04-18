@@ -11,13 +11,16 @@ public class ComboBoxAction extends JFrame implements ActionListener {
     Graphics2D graphics = null;
     DrawPanel mainPanel;
     String currentSelectedItem;
+    PixelHelper pixelHelper;
+
     public ComboBoxAction(JPanel panel, JTextArea display, DrawPanel panel2) {
         JComboBox<String> comboBox = new JComboBox<String>();
         currentSelectedItem = "None";
         JButton button = new JButton("Submit");
         mainPanel = panel2;
-        ShapeHolder shapeholder = new ShapeHolder();
         button.setBounds(375, 550, 100,60);
+        pixelHelper = new PixelHelper(mainPanel);
+        System.out.println(mainPanel.getGraphics());
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -30,9 +33,8 @@ public class ComboBoxAction extends JFrame implements ActionListener {
                             }
                             messages.append("\nSubmitted " + currentSelectedItem + " with x1: " + inputx1.getText() + ", x2: " + inputx2.getText() + ", y1: " + inputy1.getText() + ", y2: " + inputy2.getText());
 
-                            shapeholder.createLine(Integer.parseInt(inputx1.getText())
-                                    ,Integer.parseInt(inputy1.getText())
-                                    ,Integer.parseInt(inputx2.getText()),Integer.parseInt(inputy2.getText()));
+                            pixelHelper.DrawLine(Integer.parseInt(inputx1.getText()), Integer.parseInt(inputy1.getText()), Integer.parseInt(inputx2.getText()), Integer.parseInt(inputy2.getText()));
+
                             mainPanel.revalidate();
                             //Call Scala class that does something
 
@@ -43,9 +45,7 @@ public class ComboBoxAction extends JFrame implements ActionListener {
                                 throw new Exception("Text field cannot be empty...");
                             }
                             messages.append("\nSubmitted " + currentSelectedItem + " with x1: " + inputx1.getText() + ", x2: " + inputx2.getText() + ", y1: " + inputy1.getText() + ", y2: " + inputy2.getText() + "");
-                            shapeholder.createRect(Integer.parseInt(inputx1.getText())
-                                    ,Integer.parseInt(inputy1.getText())
-                                    ,Integer.parseInt(inputx2.getText()),Integer.parseInt(inputy2.getText()));
+
                             mainPanel.revalidate();
                             break;
                         case "Circle":
@@ -54,9 +54,7 @@ public class ComboBoxAction extends JFrame implements ActionListener {
                                 throw new Exception("Text field cannot be empty...");
                             }
                             messages.append("\nSubmitted " + currentSelectedItem + " with x1: " + inputx1.getText() + ", y1: " + inputy1.getText() + ", radius: " + inputr.getText());
-                            shapeholder.createCircle(Integer.parseInt(inputx1.getText())
-                                    ,Integer.parseInt(inputy1.getText())
-                                    ,Integer.parseInt(inputr.getText()));
+
                             mainPanel.revalidate();
                             break;
                         case "Text-At":
@@ -79,9 +77,7 @@ public class ComboBoxAction extends JFrame implements ActionListener {
                                 throw new Exception("Text field cannot be empty...");
                             }
                             messages.append("\nSubmitted " + currentSelectedItem + " with x1: " + inputx1.getText() + ", x2: " + inputx2.getText() + ", y1: " + inputy1.getText() + ", y2: " + inputy2.getText() + "" + "");
-                            graphics = shapeholder.createBoundingBox(Integer.parseInt(inputx1.getText())
-                                    ,Integer.parseInt(inputy1.getText())
-                                    ,Integer.parseInt(inputx2.getText()),Integer.parseInt(inputy2.getText()), mainPanel);
+
                             break;
                         case "Fill":
                             if (inputc.getText().isEmpty() || inputg.getText().isEmpty())
