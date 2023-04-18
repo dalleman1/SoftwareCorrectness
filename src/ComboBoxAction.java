@@ -45,7 +45,7 @@ public class ComboBoxAction extends JFrame implements ActionListener {
                                 throw new Exception("Text field cannot be empty...");
                             }
                             messages.append("\nSubmitted " + currentSelectedItem + " with x1: " + inputx1.getText() + ", x2: " + inputx2.getText() + ", y1: " + inputy1.getText() + ", y2: " + inputy2.getText() + "");
-
+                            pixelHelper.DrawRectangle(Integer.parseInt(inputx1.getText()), Integer.parseInt(inputy1.getText()), Integer.parseInt(inputx2.getText()), Integer.parseInt(inputy2.getText()));
                             mainPanel.revalidate();
                             break;
                         case "Circle":
@@ -54,7 +54,7 @@ public class ComboBoxAction extends JFrame implements ActionListener {
                                 throw new Exception("Text field cannot be empty...");
                             }
                             messages.append("\nSubmitted " + currentSelectedItem + " with x1: " + inputx1.getText() + ", y1: " + inputy1.getText() + ", radius: " + inputr.getText());
-
+                            pixelHelper.DrawCircle(Integer.parseInt(inputx1.getText()), Integer.parseInt(inputy1.getText()),Integer.parseInt(inputr.getText()));
                             mainPanel.revalidate();
                             break;
                         case "Text-At":
@@ -77,7 +77,7 @@ public class ComboBoxAction extends JFrame implements ActionListener {
                                 throw new Exception("Text field cannot be empty...");
                             }
                             messages.append("\nSubmitted " + currentSelectedItem + " with x1: " + inputx1.getText() + ", x2: " + inputx2.getText() + ", y1: " + inputy1.getText() + ", y2: " + inputy2.getText() + "" + "");
-
+                            pixelHelper.DrawRectangle(Integer.parseInt(inputx1.getText()), Integer.parseInt(inputy1.getText()), Integer.parseInt(inputx2.getText()), Integer.parseInt(inputy2.getText()));
                             break;
                         case "Fill":
                             if (inputc.getText().isEmpty() || inputg.getText().isEmpty())
