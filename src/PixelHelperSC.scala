@@ -3,18 +3,26 @@ import java.awt._
 
 class PixelHelperSC {
   private var pan: JPanel = null
+  private var boundaryBox: BoundaryBox = null //new BoundaryBox(0,0,0,0)
 
   def this(panel: JPanel) {
     this()
     pan = panel
   }
 
+  def createBoundaryBox(x1: Int, y1: Int, x2: Int, y2: Int): Unit = {
+    boundaryBox = new BoundaryBox(x1,y1,x2,y2)
+    DrawRectangle(x1, y1, x2, y2)
+  }
+
   def doPixel(x: Int, y: Int): Unit = {
-    val g2d = pan.getGraphics.create.asInstanceOf[Graphics2D]
-    g2d.translate(0, pan.getHeight)
-    g2d.scale(1, -1)
-    g2d.drawRect(x, y, 1, 1)
-    g2d.dispose()
+    if(boundaryBox.insideBox(x, y)) {
+      val g2d = pan.getGraphics.create.asInstanceOf[Graphics2D]
+      g2d.translate(0, pan.getHeight)
+      g2d.scale(1, -1)
+      g2d.drawRect(x, y, 1, 1)
+      g2d.dispose()
+    }
   }
 
   def DrawLine(x1: Int, y1: Int, x2: Int, y2: Int): Unit = {
