@@ -11,7 +11,7 @@ public class ComboBoxAction extends JFrame implements ActionListener {
     Graphics2D graphics = null;
     DrawPanel mainPanel;
     String currentSelectedItem;
-    PixelHelper pixelHelper;
+    PixelHelperSC pixelHelper;
 
     public ComboBoxAction(JPanel panel, JTextArea display, DrawPanel panel2) {
         JComboBox<String> comboBox = new JComboBox<String>();
@@ -19,7 +19,7 @@ public class ComboBoxAction extends JFrame implements ActionListener {
         JButton button = new JButton("Submit");
         mainPanel = panel2;
         button.setBounds(375, 550, 100,60);
-        pixelHelper = new PixelHelper(mainPanel);
+        pixelHelper = new PixelHelperSC(mainPanel);
         System.out.println(mainPanel.getGraphics());
         button.addActionListener(new ActionListener() {
             @Override
