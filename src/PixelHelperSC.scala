@@ -1,10 +1,11 @@
 import javax.swing._
 import java.awt._
+import scala.collection.mutable.ListBuffer
 
 class PixelHelperSC {
   private var pan: JPanel = null
   private var boundaryBox: BoundaryBox = null //new BoundaryBox(0,0,0,0)
-  private var shapes: List[CustomShape] = List()
+  private var shapes: ListBuffer[CustomShape] = ListBuffer.empty[CustomShape]
   private var objectCounter = 0
   def this(panel: JPanel) {
     this()
@@ -31,7 +32,7 @@ class PixelHelperSC {
     val parsedColor = Color.decode(color)
     val shapeOpt = shapes.find(_.id == g)
     shapeOpt.foreach(shape => shape match {
-      case rect: Rectangle => FillRect(parsedColor, rect.x, rect.y, rect.x2, rect.y2)
+      case rect: MyRectangle => FillRect(parsedColor, rect.x, rect.y, rect.x2, rect.y2)
       case circle: Circle => FillCircle(parsedColor, circle.x, circle.y, circle.radius)
       case line: Line => DrawLine(line.x1, line.y1, line.x2, line.y2, parsedColor)
     })
@@ -71,14 +72,14 @@ class PixelHelperSC {
     for (shapeId <- shapeIds) {
       val shapeOpt = shapes.find(_.id == shapeId)
       shapeOpt.foreach(shape => shape match {
-        case rect: Rectangle => DrawRectangle(rect.x, rect.y, rect.x2, rect.y2,parsedColor)
+        case rect: MyRectangle => DrawRectangle(rect.x, rect.y, rect.x2, rect.y2,parsedColor)
         case circle: Circle => DrawCircle(circle.x, circle.y, circle.radius,parsedColor)
         case line: Line => DrawLine(line.x1, line.y1, line.x2, line.y2,parsedColor)
       })
     }
   }
 // color: Color = Color.BLACK should be included in drawline, circle and rectangle.
-  def DrawLine(x1: Int, y1: Int, x2: Int, y2: Int, color: Color = Color.BLACK): Unit = {
+  def DrawLine(x1: Int, y1: Int, x2: Int, y2: Int, color: Color = Color.BLACK): String = {
     var x1_mod = x1
     var y1_mod = y1
     var endLoop = false
@@ -105,11 +106,13 @@ class PixelHelperSC {
         y1_mod += sy
       }
     }
+    objectCounter = objectCounter + 1;
     val line = Line("o" + objectCounter, x1, y1, x2, y2)
-    shapes = line :: shapes
+    shapes += line
+    return "o" + objectCounter
   }
 
-  def DrawCircle(inputX: Int, inputY: Int, r: Int, color: Color = Color.BLACK): Unit = {
+  def DrawCircle(inputX: Int, inputY: Int, r: Int, color: Color = Color.BLACK): String = {
     var r_mod = r
     var y = 0
     var decisionOver2 = 1 - r
@@ -129,11 +132,13 @@ class PixelHelperSC {
         decisionOver2 += 2 * (y - r_mod) + 1
       }
     }
+    objectCounter = objectCounter + 1;
     val circle = Circle("o" + objectCounter, inputX, inputY, r)
-    shapes = circle :: shapes
+    shapes += circle
+    return "o" + objectCounter
   }
 
-  def DrawRectangle(x1: Int, y1: Int, x2: Int, y2: Int, color: Color = Color.BLACK): Unit = {
+  def DrawRectangle(x1: Int, y1: Int, x2: Int, y2: Int, color: Color = Color.BLACK): String = {
     //Up
     DrawLine(x1, y1, x1, y2,color)
     //Up right
@@ -143,8 +148,10 @@ class PixelHelperSC {
     //Bottom right
     DrawLine(x1, y1, x2, y1,color)
 
-    val rect = Rectangle("o" + objectCounter, x1, y1, x2, y2)
-    shapes = rect :: shapes
+    objectCounter = objectCounter + 1;
+    val rect = MyRectangle("o" + objectCounter, x1, y1, x2, y2)
+    shapes += rect
+    return "o" + objectCounter
   }
 
 }

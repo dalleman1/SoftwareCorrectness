@@ -33,8 +33,8 @@ public class ComboBoxAction extends JFrame implements ActionListener {
                             }
                             messages.append("\nSubmitted " + currentSelectedItem + " with x1: " + inputx1.getText() + ", x2: " + inputx2.getText() + ", y1: " + inputy1.getText() + ", y2: " + inputy2.getText());
 
-                            pixelHelper.DrawLine(Integer.parseInt(inputx1.getText()), Integer.parseInt(inputy1.getText()), Integer.parseInt(inputx2.getText()), Integer.parseInt(inputy2.getText()), Color.black);
-
+                            String obj = pixelHelper.DrawLine(Integer.parseInt(inputx1.getText()), Integer.parseInt(inputy1.getText()), Integer.parseInt(inputx2.getText()), Integer.parseInt(inputy2.getText()), Color.black);
+                            messages.append("\n Object name is: " + obj);
                             mainPanel.revalidate();
                             //Call Scala class that does something
 
@@ -45,7 +45,8 @@ public class ComboBoxAction extends JFrame implements ActionListener {
                                 throw new Exception("Text field cannot be empty...");
                             }
                             messages.append("\nSubmitted " + currentSelectedItem + " with x1: " + inputx1.getText() + ", x2: " + inputx2.getText() + ", y1: " + inputy1.getText() + ", y2: " + inputy2.getText() + "");
-                            pixelHelper.DrawRectangle(Integer.parseInt(inputx1.getText()), Integer.parseInt(inputy1.getText()), Integer.parseInt(inputx2.getText()), Integer.parseInt(inputy2.getText()), Color.black);
+                            String obj2 = pixelHelper.DrawRectangle(Integer.parseInt(inputx1.getText()), Integer.parseInt(inputy1.getText()), Integer.parseInt(inputx2.getText()), Integer.parseInt(inputy2.getText()), Color.black);
+                            messages.append("\n Object name is: " + obj2);
                             mainPanel.revalidate();
                             break;
                         case "Circle":
@@ -54,7 +55,8 @@ public class ComboBoxAction extends JFrame implements ActionListener {
                                 throw new Exception("Text field cannot be empty...");
                             }
                             messages.append("\nSubmitted " + currentSelectedItem + " with x1: " + inputx1.getText() + ", y1: " + inputy1.getText() + ", radius: " + inputr.getText());
-                            pixelHelper.DrawCircle(Integer.parseInt(inputx1.getText()), Integer.parseInt(inputy1.getText()),Integer.parseInt(inputr.getText()), Color.black);
+                            String obj3 = pixelHelper.DrawCircle(Integer.parseInt(inputx1.getText()), Integer.parseInt(inputy1.getText()),Integer.parseInt(inputr.getText()), Color.black);
+                            messages.append("\n Object name is: " + obj3);
                             mainPanel.revalidate();
                             break;
                         case "Text-At":
