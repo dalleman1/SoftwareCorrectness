@@ -1,5 +1,6 @@
 import javax.swing._
 import java.awt._
+import java.awt.geom.AffineTransform
 import scala.collection.mutable.ListBuffer
 
 class PixelHelperSC {
@@ -18,14 +19,15 @@ class PixelHelperSC {
   }
 
   def doPixel(x: Int, y: Int, color: Color = Color.BLACK): Unit = {
-    if(boundaryBox.insideBox(x, y)) {
+    if(!boundaryBox.insideBox(x, y)) {
+      return
+    }
       val g2d = pan.getGraphics.create.asInstanceOf[Graphics2D]
       g2d.translate(0, pan.getHeight)
       g2d.scale(1, -1)
       g2d.setColor(color)
       g2d.drawRect(x, y, 1, 1)
       g2d.dispose()
-    }
   }
 
   def Fill(color: String, g : String):Unit = {
@@ -57,10 +59,16 @@ class PixelHelperSC {
 
   def TextAt(x : Int, y : Int, text : String): Unit = {
     val g2d = pan.getGraphics.create.asInstanceOf[Graphics2D]
-    g2d.translate(0, pan.getHeight)
-    g2d.scale(1, -1)
     g2d.setColor(Color.BLACK)
-    g2d.drawString(text, x, y)
+
+    // Flip the y-coordinate of the text
+    val fm = g2d.getFontMetrics()
+    val textWidth = fm.stringWidth(text)
+    val textHeight = fm.getHeight()
+    val newX = x
+    val newY = pan.getHeight() - y - textHeight
+
+    g2d.drawString(text, newX, newY)
     g2d.dispose()
   }
 
