@@ -61,9 +61,7 @@ class PixelHelperSC {
     val g2d = pan.getGraphics.create.asInstanceOf[Graphics2D]
     g2d.setColor(Color.BLACK)
 
-    // Flip the y-coordinate of the text
     val fm = g2d.getFontMetrics()
-    val textWidth = fm.stringWidth(text)
     val textHeight = fm.getHeight()
     val newX = x
     val newY = pan.getHeight() - y - textHeight
