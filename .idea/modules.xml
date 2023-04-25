@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SoftwareCorrectness.iml" filepath="$PROJECT_DIR$/SoftwareCorrectness.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SCTest.iml" filepath="$PROJECT_DIR$/SCTest.iml" />
     </modules>
   </component>
 </project>
