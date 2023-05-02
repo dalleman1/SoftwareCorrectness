@@ -1,6 +1,6 @@
 import java.awt._
 import javax.swing._
-import scala.collection.mutable.ListBuffer
+import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
 class PixelHelperSC {
   private var pan: JPanel = null
@@ -17,7 +17,18 @@ class PixelHelperSC {
     DrawRectangle(x1, y1, x2, y2)
   }
 
+  //Used for testing
+  var donePixels: ArrayBuffer[(Int, Int)] = new ArrayBuffer[(Int, Int)]
+
+  //Muck for testing
   def doPixel(x: Int, y: Int, color: Color = Color.BLACK): Unit = {
+    if (boundaryBox.insideBox(x, y)) {
+      donePixels.append((x, y))
+    }
+  }
+
+  //Real doPixel
+  def doPixelReal(x: Int, y: Int, color: Color = Color.BLACK): Unit = {
     if(!boundaryBox.insideBox(x, y)) {
       return
     }
